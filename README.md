@@ -28,7 +28,7 @@ MzansiBuilds is a full-stack developer collaboration platform that allows develo
 
 ## 📸 Screenshots
 
-(Add screenshots here later)
+(Will Add screenshots later)
 
 ---
 
