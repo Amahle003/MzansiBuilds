@@ -1,39 +1,54 @@
-# 🚀 MzansiBuilds
+# 🏗️ MzansiBuilds
 
-MzansiBuilds is a full-stack developer collaboration platform that allows developers to build in public, track project progress, and collaborate with others.
+MzansiBuilds is a full-stack project management web application built with React and Firebase. It allows users to sign up, log in, create projects, track progress, update project stages, and engage with community-style features through a clean and responsive interface.
 
----
+## 🚀 Features
 
-## 🌟 Features
+- User authentication with Firebase
+- Create and manage projects
+- Update project progress, stage, and support
+- Dashboard overview
+- My Projects page
+- Celebration Wall
+- Live Feed
+- Responsive user interface
 
-- 🔐 User Authentication (Signup/Login)
-- 👤 User Profile Dashboard
-- 🛠 Create and Manage Projects
-- 📊 Track Progress with Milestones
-- 🌍 Live Feed of Developer Projects
-- 💬 Comment on Projects
-- 🤝 Request Collaboration ("Raise Hand")
-- 🎉 Celebration Wall for Completed Projects
+## 🛠️ Tech Stack
 
----
-
-## 🧱 Tech Stack
-
-- Frontend: React (Vite)
-- Backend: Firebase
-- Database: Firestore
-- Authentication: Firebase Auth
-
----
+- React
+- Vite
+- JavaScript
+- Firebase Authentication
+- Firebase Firestore
+- CSS / custom styling
 
 ## 📸 Screenshots
 
-(Will Add screenshots later)
+### Home Page
+![Home Page](public/screenshots/home.png)
 
----
+### Login Page
+![Login Page](public/screenshots/login.png)
 
-## 🚀 Getting Started
+### Sign Up Page
+![Sign Up Page](public/screenshots/signup.png)
+
+### Dashboard
+![Dashboard](public/screenshots/dashboard.png)
+
+### My Projects
+![My Projects](public/screenshots/myprojects.png)
+
+### Celebration Wall
+![Celebration Wall](public/screenshots/celebrationwall.png)
+
+### Live Feed
+![Live Feed](public/screenshots/livefeed.png)
+
+## ⚙️ Installation
+
+Clone the repository:
 
 ```bash
-npm install
-npm run dev
+git clone https://github.com/Amahle003/MzansiBuilds.git
+cd MzansiBuilds
