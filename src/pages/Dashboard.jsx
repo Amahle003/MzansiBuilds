@@ -119,83 +119,284 @@ export default function Dashboard() {
   };
 
   return (
-    <div>
-      <h1>📊 Dashboard</h1>
+    <div style={pageWrapperStyle}>
+      <div style={cardStyle}>
+        <h1 style={titleStyle}>📊 Dashboard</h1>
+        <p style={subtitleStyle}>
+          Manage your profile and keep your account information up to date.
+        </p>
 
-      {loading ? (
-        <p>Loading profile...</p>
-      ) : (
-        <>
-          {message && <p>{message}</p>}
-
-          {!editMode ? (
-            <div>
-              <p><strong>Full Name:</strong> {profile.fullName || "N/A"}</p>
-              <p><strong>Email:</strong> {profile.email || "N/A"}</p>
-              <p><strong>Phone:</strong> {profile.phone || "N/A"}</p>
-              <p><strong>Role:</strong> {profile.role || "N/A"}</p>
-              <p><strong>UID:</strong> {profile.uid || "N/A"}</p>
-              <p><strong>Created At:</strong> {formatDate(profile.createdAt)}</p>
-
-              <button onClick={() => setEditMode(true)}>Edit Profile</button>
-              <button onClick={logout} style={{ marginLeft: "10px" }}>
-                Logout
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleUpdate}>
-              <input
-                type="text"
-                name="fullName"
-                placeholder="Full Name"
-                value={profile.fullName}
-                onChange={handleChange}
-              />
-
-              <br /><br />
-
-              <input
-                type="text"
-                name="phone"
-                placeholder="Phone Number"
-                value={profile.phone}
-                onChange={handleChange}
-              />
-
-              <br /><br />
-
-              <select
-                name="role"
-                value={profile.role}
-                onChange={handleChange}
+        {loading ? (
+          <p style={infoTextStyle}>Loading profile...</p>
+        ) : (
+          <>
+            {message && (
+              <p
+                style={{
+                  ...messageStyle,
+                  color: message.includes("Failed") ? "#dc2626" : "#16a34a",
+                  background: message.includes("Failed") ? "#fef2f2" : "#f0fdf4",
+                  border: message.includes("Failed")
+                    ? "1px solid #fecaca"
+                    : "1px solid #bbf7d0",
+                }}
               >
-                <option value="">Select role</option>
-                <option value="client">Client</option>
-                <option value="worker">Worker</option>
-              </select>
+                {message}
+              </p>
+            )}
 
-              <br /><br />
+            {!editMode ? (
+              <div>
+                <div style={profileGridStyle}>
+                  <div style={profileItemStyle}>
+                    <span style={labelStyle}>Full Name</span>
+                    <span style={valueStyle}>{profile.fullName || "N/A"}</span>
+                  </div>
 
-              <input
-                type="email"
-                value={profile.email}
-                disabled
-              />
+                  <div style={profileItemStyle}>
+                    <span style={labelStyle}>Email</span>
+                    <span style={valueStyle}>{profile.email || "N/A"}</span>
+                  </div>
 
-              <br /><br />
+                  <div style={profileItemStyle}>
+                    <span style={labelStyle}>Phone</span>
+                    <span style={valueStyle}>{profile.phone || "N/A"}</span>
+                  </div>
 
-              <button type="submit">Save Changes</button>
-              <button
-                type="button"
-                onClick={() => setEditMode(false)}
-                style={{ marginLeft: "10px" }}
-              >
-                Cancel
-              </button>
-            </form>
-          )}
-        </>
-      )}
+                  <div style={profileItemStyle}>
+                    <span style={labelStyle}>Role</span>
+                    <span style={valueStyle}>{profile.role || "N/A"}</span>
+                  </div>
+
+                  <div style={profileItemStyle}>
+                    <span style={labelStyle}>UID</span>
+                    <span style={smallValueStyle}>{profile.uid || "N/A"}</span>
+                  </div>
+
+                  <div style={profileItemStyle}>
+                    <span style={labelStyle}>Created At</span>
+                    <span style={valueStyle}>{formatDate(profile.createdAt)}</span>
+                  </div>
+                </div>
+
+                <div style={buttonRowStyle}>
+                  <button
+                    onClick={() => setEditMode(true)}
+                    style={primaryButtonStyle}
+                  >
+                    ✏️ Edit Profile
+                  </button>
+
+                  <button onClick={logout} style={dangerButtonStyle}>
+                    🚪 Logout
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleUpdate}>
+                <div style={fieldGroupStyle}>
+                  <label style={labelStyle}>Full Name</label>
+                  <input
+                    type="text"
+                    name="fullName"
+                    placeholder="Full Name"
+                    value={profile.fullName}
+                    onChange={handleChange}
+                    style={inputStyle}
+                  />
+                </div>
+
+                <div style={fieldGroupStyle}>
+                  <label style={labelStyle}>Phone Number</label>
+                  <input
+                    type="text"
+                    name="phone"
+                    placeholder="Phone Number"
+                    value={profile.phone}
+                    onChange={handleChange}
+                    style={inputStyle}
+                  />
+                </div>
+
+                <div style={fieldGroupStyle}>
+                  <label style={labelStyle}>Role</label>
+                  <select
+                    name="role"
+                    value={profile.role}
+                    onChange={handleChange}
+                    style={selectStyle}
+                  >
+                    <option value="">Select role</option>
+                    <option value="client">Client</option>
+                    <option value="worker">Worker</option>
+                  </select>
+                </div>
+
+                <div style={fieldGroupStyle}>
+                  <label style={labelStyle}>Email</label>
+                  <input
+                    type="email"
+                    value={profile.email}
+                    disabled
+                    style={{ ...inputStyle, background: "#f3f4f6", cursor: "not-allowed" }}
+                  />
+                </div>
+
+                <div style={buttonRowStyle}>
+                  <button type="submit" style={primaryButtonStyle}>
+                    💾 Save Changes
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setEditMode(false)}
+                    style={secondaryButtonStyle}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 }
+
+const pageWrapperStyle = {
+  maxWidth: "950px",
+  margin: "0 auto",
+  padding: "32px 20px",
+};
+
+const cardStyle = {
+  background: "#ffffff",
+  border: "1px solid #e5e7eb",
+  borderRadius: "18px",
+  padding: "28px",
+  boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
+};
+
+const titleStyle = {
+  fontSize: "30px",
+  marginBottom: "8px",
+  color: "#111827",
+};
+
+const subtitleStyle = {
+  color: "#6b7280",
+  marginBottom: "24px",
+  fontSize: "15px",
+};
+
+const infoTextStyle = {
+  color: "#4b5563",
+  fontSize: "15px",
+};
+
+const messageStyle = {
+  padding: "12px 14px",
+  borderRadius: "10px",
+  marginBottom: "20px",
+  fontWeight: "500",
+};
+
+const profileGridStyle = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+  gap: "16px",
+};
+
+const profileItemStyle = {
+  background: "#f9fafb",
+  border: "1px solid #e5e7eb",
+  borderRadius: "14px",
+  padding: "16px",
+};
+
+const labelStyle = {
+  display: "block",
+  fontSize: "13px",
+  fontWeight: "700",
+  color: "#6b7280",
+  marginBottom: "8px",
+  textTransform: "uppercase",
+  letterSpacing: "0.5px",
+};
+
+const valueStyle = {
+  color: "#111827",
+  fontWeight: "500",
+  fontSize: "15px",
+};
+
+const smallValueStyle = {
+  color: "#111827",
+  fontWeight: "500",
+  fontSize: "13px",
+  wordBreak: "break-all",
+};
+
+const fieldGroupStyle = {
+  marginBottom: "18px",
+};
+
+const inputStyle = {
+  width: "100%",
+  padding: "12px 14px",
+  borderRadius: "10px",
+  border: "1px solid #d1d5db",
+  fontSize: "14px",
+  boxSizing: "border-box",
+};
+
+const selectStyle = {
+  width: "100%",
+  padding: "12px 14px",
+  borderRadius: "10px",
+  border: "1px solid #d1d5db",
+  fontSize: "14px",
+  boxSizing: "border-box",
+  background: "#ffffff",
+};
+
+const buttonRowStyle = {
+  display: "flex",
+  gap: "12px",
+  flexWrap: "wrap",
+  marginTop: "24px",
+};
+
+const primaryButtonStyle = {
+  padding: "12px 18px",
+  borderRadius: "10px",
+  border: "none",
+  background: "#2563eb",
+  color: "#ffffff",
+  cursor: "pointer",
+  fontWeight: "600",
+  fontSize: "14px",
+};
+
+const secondaryButtonStyle = {
+  padding: "12px 18px",
+  borderRadius: "10px",
+  border: "1px solid #d1d5db",
+  background: "#ffffff",
+  color: "#111827",
+  cursor: "pointer",
+  fontWeight: "600",
+  fontSize: "14px",
+};
+
+const dangerButtonStyle = {
+  padding: "12px 18px",
+  borderRadius: "10px",
+  border: "none",
+  background: "#dc2626",
+  color: "#ffffff",
+  cursor: "pointer",
+  fontWeight: "600",
+  fontSize: "14px",
+};
